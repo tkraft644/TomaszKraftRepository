@@ -1,0 +1,64 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "Tworzenie wpisu";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (User.IsInRole("Admin"))
+{
+<div class="row">
+    <form enctype="multipart/form-data" method="post">
+
+        <div class="white black-text">
+            <div class="row">
+                <div class="input-field col s6">
+                    <label asp-for="Tytul"></label>
+                    <input asp-for="Tytul" class="form-control" />
+                    <span asp-validation-for="Tytul" class="text-danger"></span>
+                </div>
+                <div class="input-field col s6">
+                    <label asp-for="Autor"></label>
+                    <input asp-for="Autor" class="form-control" />
+                    <span asp-validation-for="Autor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <label asp-for="Tresc"></label>
+                    <textarea asp-for="Tresc" class="materialize-textarea"></textarea>
+                    <span asp-validation-for="Tresc" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <div class="file-field input-field">
+                        <div class="btn waves-effect amber darken-3 ">
+                            <span>Obraz</span>
+                                <input asp-for="Obrazek" type="file" class="form-control custom-file-input">
+                            <span asp-validation-for="Obrazek" class="text-danger"></span>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button asp-page-handler="Upload" type="submit" class="waves-effect amber darken-3 btn">Dodaj</button>
+        <a asp-controller="Aktualności" asp-action="Index" class="btn waves-effect amber darken-3">Anuluj</a>
+    </form>
+</div>
+}
+else
+{
+    <h1>Strona dostępna tylko dla administratorów</h1>
+    <a class="waves-effect amber darken-3 btn-large" asp-area="Identity" asp-page="/Account/Login">
+        Zaloguj się
+        <i class="material-icons right">send</i>
+    </a>
+}
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

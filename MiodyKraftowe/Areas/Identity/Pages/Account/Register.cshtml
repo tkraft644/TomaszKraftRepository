@@ -1,0 +1,42 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Rejestracja";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<div class="row">
+    <div class="col s12">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Utwórz nowe konto.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="input-field col s12">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.Email"></label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <div class="input-field col s12">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.Password"></label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+              <p>Hasło powinno posiadać minimum 8 znaków w tym przynajmniej 1 cyfrę i znak specjalny</p>
+            <div class="input-field col s12">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.ConfirmPassword"></label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <button id="registerSubmit" type="submit" class="waves-effect amber darken-3 btn">Zarejestruj</button>
+            @*<a class="waves-effect amber darken-3 btn" asp-area="Identity" asp-page="/Account/Login">Mam już konto!</a>*@
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+        }

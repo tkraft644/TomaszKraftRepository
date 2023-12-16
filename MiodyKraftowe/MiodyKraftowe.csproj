@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>aspnet-MiodyKraftowe-F78970B0-35F5-42CF-BE80-6C7F7588AB7C</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Remove="Views\Kategorie\TestPage.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Views\Aktualności\index.cshtml" />
+		<None Include="Views\Kontakt\Create.cshtml" />
+		<None Include="Views\Kontakt\Delete.cshtml" />
+		<None Include="Views\Kontakt\Index.cshtml" />
+		<None Include="wwwroot\images\Obrazki\Miód.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MailKit" Version="3.4.3" />
+		<PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<UpToDateCheckInput Remove="Views\Kategorie\TestPage.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<_ContentIncludedByDefault Remove="Views\Kategorie\TestPage.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Migrations\" />
+		<Folder Include="wwwroot\images\uploaded\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="Views\Shared\_Dropdown.cshtml">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MimeKit" Version="3.4.3" />
+</ItemGroup>
+
+</Project>

@@ -1,0 +1,23 @@
+﻿@using Org.BouncyCastle.Asn1.Ocsp;
+@model IdentityRole
+
+@{
+    ViewData["Title"] = "Strona Administracji";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+<div class="row">
+    <form method="post">
+        <div class="white black-text">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="email" name="Email" value="" placeholder="Email" class="form-control" />
+                    <input type="hidden" name="UserId" value="" />
+                    <input type="hidden" name="RoleId" value="Admin" />
+                </div>
+            </div>
+        </div>
+        <button asp-action="AddUserToRole" type="submit" class="waves-effect amber darken-3 btn">Dodaj użytkownika</button>
+        <a asp-controller="Admin" asp-action="" class="btn waves-effect amber darken-3">Anuluj</a>
+    </form>
+</div>

@@ -1,0 +1,66 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "Edycja wpisu";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (User.IsInRole("Admin"))
+{
+    <div class="row">
+
+        <form method="post" asp-action="Edit">
+            <div class="white black-text">
+                <div class="border p-3 mt-4">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label asp-for="Tytul"></label>
+                            <input asp-for="Tytul" class="form-control" />
+                            <span asp-validation-for="Tytul" class="text-danger"></span>
+                        </div>
+                        <div class="input-field col s6">
+                            <label asp-for="Autor"></label>
+                            <input asp-for="Autor" class="form-control" />
+                            <span asp-validation-for="Autor" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label asp-for="Tresc"></label>
+                            <input asp-for="Tresc" class="form-control" />
+                            <span asp-validation-for="Tresc" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label asp-for="DataPublikacji"></label>
+                            <input asp-for="DataPublikacji" disabled class="form-control" />
+                            <span asp-validation-for="DataPublikacji" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label asp-for="ObrazekURL" for="autocomplete-input"></label>
+                            <input asp-for="ObrazekURL" class="form-control" />
+                            <span asp-validation-for="ObrazekURL" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="waves-effect amber darken-3 btn">Aktualizuj</button>
+            <a asp-controller="Aktualności" asp-action="Posts" class="btn waves-effect amber darken-3">Anuluj</a>
+        </form>
+    </div>
+}
+else
+{
+    <h1>Strona dostępna tylko dla administratorów</h1>
+    <a class="waves-effect amber darken-3 btn-large" asp-area="Identity" asp-page="/Account/Login">
+        Zaloguj się
+        <i class="material-icons right">send</i>
+    </a>
+}
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

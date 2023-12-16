@@ -1,0 +1,39 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Logowanie";
+}
+
+<h3>@ViewData["Title"]</h3>
+<div class="row">
+    <div class="col s12">
+        <section>
+            <form id="account" method="post">
+                <h3>Zaloguj się.</h3>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="input-field col s12">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="Input.Email" class="form-label text-amber text-darken-3"></label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="input-field col s12">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <label asp-for="Input.Password" class="form-label text-amber text-darken-3"></label>
+                    <span asp-validation-for="Input.Password" class="text-danger "></span>
+                </div>
+                <button id="login-submit" type="submit" class="waves-effect amber darken-3 btn">Zaloguj</button>
+                <a class="waves-effect amber darken-3 btn" id="forgot-password" asp-page="./ForgotPassword">Zapomniałeś hasło?</a>
+                <a class="waves-effect amber darken-3 btn" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Zarejestruj się!</a>
+                @*<a class="waves-effect amber darken-3 btn" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Wyślij ponownie e-mail</a>*@
+
+            </form>
+        </section>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

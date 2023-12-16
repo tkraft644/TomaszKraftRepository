@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewData["Title"] = "Posty";
+}
+@if (User.IsInRole("Admin"))
+{
+
+    <div class="fixed-action-btn">
+        <a href="#!" class="btn-floating btn-large waves-effect amber darken-3">
+            <i class="material-icons">menu</i>
+        </a>
+        <ul>
+            <li>
+                <a asp-action="Posts"
+               class="btn-floating waves-effect amber darken-4">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+            </li>
+            <li>
+                <a asp-action="create"
+               class="btn-floating waves-effect amber darken-4">
+                    <i class="large material-icons">add</i>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="Index"
+               class="btn-floating waves-effect amber darken-4">
+                    <i class="large material-icons">settings</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <ul class="collection with-header">
+
+        <li class="collection-header"><h4>Tytuł wpisu</h4></li>
+        @foreach (var obj in Model)
+        {
+            <li class="collection-item flow-text">
+                <div>
+                    @obj.Tytul
+
+                    <a asp-controller="Aktualności" asp-action="Edit" asp-route-id="@obj.Id"
+               class="waves-effect greeen-text secondary-content flow-text">Edytuj<i class="material-icons right">mode_edit</i></a>
+                    <div class="waves-effect black-text secondary-content flow-text"> | </div>
+                    <a asp-controller="Aktualności" asp-action="Delete" asp-route-id="@obj.Id"
+               class="waves-effect red-text secondary-content flow-text">Usuń<i class="material-icons left">delete</i></a>
+                </div>
+            </li>
+        }
+    </ul>
+
+
+    @foreach (var obj in Model)
+    {
+
+
+
+
+        <div class="row">
+            <div class="col s12 m12 hide-on-med-and-up">
+                <div class="card large">
+                    <div class="card-image large">
+                        <img src=@obj.ObrazekURL>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title"> @obj.Tytul</span>
+                        <p>
+                            @obj.Autor | @obj.DataPublikacji.DateTime.ToString("dd.MM.yyyy HH:mm")<br>
+                            Scieżka do pliku zdjęcia: @obj.ObrazekURL<br>
+                            @obj.Tresc
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 hide-on-small-only">
+                <div class="card horizontal medium">
+                    <div class="card-image medium">
+                        <img src="@obj.ObrazekURL">
+                    </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <span class="card-title">@obj.Tytul</span>
+                            <p>
+                                @obj.Autor | @obj.DataPublikacji.DateTime.ToString("dd.MM.yyyy HH:mm")<br>
+                                Scieżka do pliku zdjęcia: @obj.ObrazekURL<br>
+                                @obj.Tresc
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+else
+{
+    <h1>Strona dostępna tylko dla administratorów</h1>
+    <a class="waves-effect amber darken-3 btn-large" asp-area="Identity" asp-page="/Account/Login">
+        Zaloguj się
+        <i class="material-icons right">send</i>
+    </a>
+}
+
+
+

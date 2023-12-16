@@ -1,0 +1,67 @@
+﻿@model Produkt
+@{
+    ViewData["Title"] = "Edycja Produktu";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (User.IsInRole("Admin"))
+{
+    <div class="row">
+        <form method="post" asp-action="Edit">
+
+            <div class="white black-text">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label asp-for="Nazwa"></label>
+                        <input asp-for="Nazwa" class="form-control" />
+                        <span asp-validation-for="Nazwa" class="text-danger"></span>
+                    </div>
+                    <div class="input-field col s6">
+                        <label asp-for="NazwaKategoria">Kategoria</label>
+                        <input asp-for="NazwaKategoria" class="form-control" />
+                        <span asp-validation-for="NazwaKategoria" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label asp-for="Opis"></label>
+                        <input asp-for="Opis" class="form-control" />
+                        <span asp-validation-for="Opis" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label asp-for="Cena"></label>
+                        <input asp-for="Cena" class="form-control" />
+                        <span asp-validation-for="Cena" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label asp-for="ObrazekURL" for="autocomplete-input"></label>
+                        <input asp-for="ObrazekURL" class="form-control" />
+                        <span asp-validation-for="ObrazekURL" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="waves-effect amber darken-3 btn">Aktualizuj</button>
+            <a asp-action="Index" class="waves-effect amber darken-3 btn">
+                Anuluj
+            </a>
+        </form>
+
+    </div>
+}
+else
+{
+    <h1>Strona dostępna tylko dla administratorów</h1>
+    <a class="waves-effect amber darken-3 btn-large" asp-area="Identity" asp-page="/Account/Login">
+        Zaloguj się
+        <i class="material-icons right">send</i>
+    </a>
+}
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

@@ -1,0 +1,45 @@
+﻿@model Kategoria
+@{
+	ViewData["Title"] = "Tworzenie kategorii";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+@if (User.IsInRole("Admin"))
+{
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Create Category</h2>
+			<hr />
+		</div>
+		<div class="mb-3">
+			<label asp-for="Nazwa"></label>
+			<input asp-for="Nazwa" class="form-control" />
+			<span asp-validation-for="Nazwa" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="DisplayOrder"></label>
+			<input asp-for="DisplayOrder" class="form-control" />
+			<span asp-validation-for="DisplayOrder" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+		<a asp-controller="Kategorie" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+}
+else
+{
+<h1>Strona dostępna tylko dla administratorów</h1>
+<a class="waves-effect amber darken-3 btn-large" asp-area="Identity" asp-page="/Account/Login">
+    Zaloguj się
+    <i class="material-icons right">send</i>
+</a>
+}
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

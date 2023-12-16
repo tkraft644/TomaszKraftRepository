@@ -1,0 +1,109 @@
+﻿@model OrderModel
+@{
+    ViewData["Title"] = "Zamówienie";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (User.Identity.IsAuthenticated)
+{
+    @if (Model.OrderModelDetails != null)
+    {
+        <div class="white black-text">
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Produkt</th>
+                        <th>Cena za sztukę</th>
+                        <th>Ilość</th>
+                        <th>Razem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderModelDetails)
+                    {
+                        <tr>
+                            <td>
+                                <img class="responsive-img" width="120" src="@item.Image">
+                            </td>
+                            <td>
+
+                                @item.ProductName
+                            </td>
+                            <td>@item.Price.ToString("C2")</td>
+                            <td>
+                                @item.Quantity
+                            </td>
+                            <td>
+                                @Model.OrderModelDetails.Where(x => x.ProductId == item.ProductId).Sum(x => x.Quantity * x.Price).ToString("C2")
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td class="" colspan="6"><span class="right">Wszystko razem: @Model.GrandTotal</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <form class="col s12" method="post">
+                    <fieldset>
+                        <legend>Dane Do zamówienia</legend>
+                        <input asp-for="GrandTotal" hidden />
+                        <input asp-for="OrderID" hidden />
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <label asp-for="Name">Imie</label>
+                                <input asp-for="Name" asp-val-required="true" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="input-field col s6">
+                                <label asp-for="LastName">Nazwisko</label>
+                                <input asp-for="LastName" class="form-control" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label asp-for="Adress">Adres wysyłki</label>
+                                <input asp-for="Adress" asp-val-required="true" placeholder="Ulica lokal/mieszkanie, kod-pocztowy miejscowość" class="form-control" />
+                                <span asp-validation-for="Adress" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <label asp-for="Email">Adres E-mail</label>
+                                <input asp-for="Email" asp-val-required="true" sp-val-data-val-email="true" placeholder="adres@email.pl" id="email" type="email" class="validate" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="input-field col s6">
+                                <label asp-for="Number">Numer telefonu</label>
+                                <input asp-for="Number" asp-val-required="true" type="tel" id="phone" placeholder="xxxxxxxxx"  pattern="[0-9]{9}" class="validate" class="form-control" />
+                                <span asp-validation-for="Number" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="waves-effect green btn right">Zamów</button>
+                        <a asp-action="Index" class="btn waves-effect amber darken-3">Powrót</a>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3 class="display-4 text-center">Koszyk jest pusty</h3>
+    }
+
+}
+else
+{
+    <h1>Strona dostępna tylko dla zalogowanych</h1>
+    <a class="waves-effect amber darken-3 btn-large" asp-area="Identity" asp-page="/Account/Login">
+        Zaloguj się
+        <i class="material-icons right">send</i>
+    </a>
+}
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

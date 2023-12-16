@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Strona Administracji";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+@if (User.IsInRole("Admin"))
+{
+
+<div class="collection">
+    <a asp-controller="Koszyk" asp-action="AdministracjaZamowien" class="collection-item waves-effect amber-text text-darken-3 flow-text">
+        Niezrealizowane Zamówienia<i class="material-icons right">send</i>
+    </a>
+    <a asp-controller="Koszyk" asp-action="HistoriaZamowien" class="collection-item waves-effect amber-text text-darken-3 flow-text">
+        Historia Zrealizowanych Zamówień<i class="material-icons right">send</i>
+    </a>
+    <a asp-controller="Kontakt" asp-action="" class="collection-item waves-effect amber-text text-darken-3 flow-text">
+        Wiadomosci<i class="material-icons right">send</i>
+    </a>
+    <a asp-controller="Aktualności" asp-action="Posts" class="collection-item waves-effect amber-text text-darken-3 flow-text">
+        Edycja Postów<i class="material-icons right">send</i>
+    </a>
+    <a asp-controller="Sklep" asp-action="Products" class="collection-item waves-effect amber-text text-darken-3 flow-text">
+        Edycja Produktów<i class="material-icons right">send</i>
+    </a>
+    <a asp-controller="Admin" asp-action="AddUserToRole" class="collection-item waves-effect amber-text text-darken-3 flow-text">
+        Dodawanie Administratora<i class="material-icons right">send</i>
+    </a>
+</div>
+
+}
+else
+{
+<h1>Strona dostępna tylko dla administratorów</h1>
+<a class="waves-effect amber darken-3 btn-large" asp-area="Identity" asp-page="/Account/Login">
+    Zaloguj się
+    <i class="material-icons right">send</i>
+</a>
+}

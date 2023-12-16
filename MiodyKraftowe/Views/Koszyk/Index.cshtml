@@ -1,0 +1,88 @@
+﻿@model CartViewModel
+@{
+    ViewData["Title"] = "Koszyk";
+}
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">
+        <hr />
+        <div class="center flow-text">
+            @TempData["success"]
+        </div>
+        <hr />
+    </div>
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (Model.CartItems.Count > 0)
+{
+    <div class="white black-text">
+    <table class="centered">
+
+        <thead>
+            <tr>
+                <th></th>
+                <th>Produkt</th>
+                <th>Cena za sztukę</th>
+                <th>Ilość</th>
+                <th></th>
+                <th>Razem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>
+                        <img class="responsive-img" width="120" src="@item.Image">
+                    </td>
+                    <td>
+                        @item.ProductName
+                    </td>
+                    <td>@item.Price.ToString("C2")</td>
+                    <td>
+                        @item.Quantity
+                    </td>
+                    <td>
+                    <a class="btn-floating waves-effect waves-light green" asp-action="Add" asp-route-id="@item.ProductId">
+                        <i class="material-icons">add</i>
+                    </a>
+                    <a class="btn-floating waves-effect waves-light orange" asp-action="Decrease" asp-route-id="@item.ProductId">
+                        <i class="material-icons">remove</i>
+                    </a>
+                    <a class="btn-floating waves-effect waves-light red" asp-action="Remove" asp-route-id="@item.ProductId">
+                        <i class="material-icons">delete</i>
+                    </a>
+                    </td>
+                    <td>@Model.CartItems.Where(x => x.ProductId == item.ProductId).Sum(x => x.Quantity * x.Price).ToString("C2")</td>
+                </tr>
+            }
+            <tr>
+                <td class="" colspan="6"><span class="right">Wszystko razem: @Model.GrandTotal.ToString("C2")</span></td>
+            </tr>
+            <tr>
+                <td class="" colspan="3">
+                    <a class="btn waves-effect amber darken-3 left" asp-controller="Sklep" asp-action="Index">Kontynuuj zakupy</a>
+                </td>
+                <td class="" colspan="3">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn waves-effect waves-light green right" asp-action="Order">Dalej</a>
+                    }
+                    else
+                    {
+                        <a class="btn waves-effect waves-light green right" asp-area="Identity" asp-page="/Account/Login">Zaloguj się aby przejść do zamóienia</a>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <br/>
+}
+else
+{
+    <h3 class="display-4 text-center">Koszyk jest pusty</h3>
+}
+
+

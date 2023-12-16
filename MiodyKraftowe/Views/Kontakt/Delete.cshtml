@@ -1,0 +1,31 @@
+﻿@model Wiadomosc
+@{
+    ViewData["Title"] = "Usuwanie Wiadomosci";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />@if (User.IsInRole("Admin"))
+{
+<div class="row">
+    <form method="post" asp-action="Delete">
+        <div class="white black-text">
+            <div class="row">
+                <input asp-for="Id" hidden />
+                <div class="input-field col s12">
+                    <label asp-for="Tresc"></label>
+                    <input asp-for="Tresc" disabled class="form-control" />
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="waves-effect amber darken-3 btn">Usuń</button>
+        <a asp-action="WszystkieWiadomosci" class="btn waves-effect amber darken-3">Anuluj</a>
+    </form>
+</div>
+}
+else
+{
+    <h1>Strona dostępna tylko dla administratorów</h1>
+    <a class="waves-effect amber darken-3 btn-large" asp-area="Identity" asp-page="/Account/Login">
+        Zaloguj się
+        <i class="material-icons right">send</i>
+    </a>
+}

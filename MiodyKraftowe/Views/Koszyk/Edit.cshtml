@@ -1,0 +1,65 @@
+﻿@model OrderModel
+@{
+    ViewData["Title"] = "Edycja Zamówienia";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />@if (User.IsInRole("Admin"))
+{
+<div class="row">
+    <form asp-action="Edit" method="post">
+        <div class="white black-text">
+            <div class="row">
+                <div class="input-field col s6">
+                    <label asp-for="OrderID"></label>
+                    <input asp-for="OrderID" disabled class="form-control" />
+                </div>
+                <div class="input-field col s6">
+                    <label asp-for="Status"></label>
+                    <input asp-for="Status" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+                <div class="input-field col s6">
+                    <label asp-for="LastName"></label>
+                    <input asp-for="LastName" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <label asp-for="Adress"></label>
+                    <input asp-for="Adress" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="input-field col s6">
+                    <label asp-for="Number"></label>
+                    <input asp-for="Number" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="waves-effect amber darken-3 btn">Aktualizuj</button>
+        <a asp-controller="Koszyk" asp-action="AllOrders" class="btn waves-effect amber darken-3">Anuluj</a>
+    </form>
+</div>
+}
+else
+{
+    <h1>Strona dostępna tylko dla administratorów</h1>
+    <a class="waves-effect amber darken-3 btn-large" asp-area="Identity" asp-page="/Account/Login">
+        Zaloguj się
+        <i class="material-icons right">send</i>
+    </a>
+}
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

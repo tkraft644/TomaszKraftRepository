@@ -1,0 +1,85 @@
+﻿@model Wiadomosc
+@{
+    ViewData["Title"] = "Formularz kontaktowy";
+}
+@if (User.IsInRole("Admin"))
+{
+    <div class="fixed-action-btn">
+        <a href="#!" class="btn-floating btn-large waves-effect amber darken-3">
+            <i class="material-icons">menu</i>
+        </a>
+        <ul>
+            <li>
+                <a asp-action=""
+               class="btn-floating waves-effect amber darken-4">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Create"
+               class="btn-floating waves-effect amber darken-4">
+                    <i class="large material-icons">add</i>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="Index"
+               class="btn-floating waves-effect amber darken-4">
+                    <i class="large material-icons">settings</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+<h3>Skontaktuj się z nami</h3>
+<p class="flow-text">Zawsze odpowiadamy</pclass>
+<hr />
+<div class="responsive">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9516.893545311505!2d16.27496934479779!3d53.39294377557553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47016b904fa8e509%3A0xf4c2fa6fb70f5066!2s78-607%20K%C5%82osowo!5e0!3m2!1sen!2spl!4v1666352935659!5m2!1sen!2spl" width="100%" height="480" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+<div class="center-align">
+    <hr />
+        <p class ="flow-text">Znajdujemy się w małej miejscowości na Pojezierzu Wałeckim </p>
+</div>
+<hr />
+
+<div class="white black-text">
+    <div class="row">
+        <form class="col s12" method="post">
+            <fieldset>
+                <legend>Formularz kontaktowy</legend>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label asp-for="Imie"></label>
+                        <input asp-for="Imie" class="form-control" />
+                        <span asp-validation-for="Imie" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="input-field col s6">
+                        <label asp-for="Telefon"></label>
+                        <input asp-for="Telefon" class="form-control" />
+                        <span asp-validation-for="Telefon" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label asp-for="Tresc"></label>
+                        <textarea asp-for="Tresc" class="materialize-textarea"></textarea>
+                        <span asp-validation-for="Tresc" class="text-danger"></span>
+                    </div>
+                </div>
+                <button type="submit" class="waves-effect amber darken-3 btn">Wyślij</button>
+                <a asp-controller="Aktualności" asp-action="Index" class="btn waves-effect amber darken-3">Anuluj</a>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

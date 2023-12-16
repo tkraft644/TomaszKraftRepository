@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<ul>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li>
+            <a asp-area="" asp-controller="Koszyk" asp-action="AllOrders">Zamówienia</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Kontakt" asp-action="Create">Kontakt</a>
+        </li>
+        <li>
+            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profil</a>
+        </li>
+        <li>
+            <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Wyloguj</a>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a asp-area="" asp-controller="Kontakt" asp-action="Create">Kontakt</a>
+        </li>
+        <li>
+            <a asp-area="Identity" asp-page="/Account/Register">Zarejestruj się</a>
+        </li>
+        <li>
+            <a asp-area="Identity" asp-page="/Account/Login">Zaloguj</a>
+        </li>
+    }
+</ul>

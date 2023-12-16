@@ -1,0 +1,81 @@
+﻿@model OrderModel
+@{
+    ViewData["Title"] = "Szczegóły zamówienia";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="row">
+    <div class="col s12">
+        <div class="card white">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <span class="card-title">Nr Zamówienia: @Model.OrderID | Status: @Model.Status</span>
+                    <p>
+                        @if (User.IsInRole("Admin"))
+                        {
+                        <p>
+                            ID odbiordy: @Model.OrderUserID
+                            <br /><br />
+                        </p>
+                        }
+
+                    <strong> Realizacja zamówienia rozpocznie się po otrzymaniu wpłaty na konto.</strong><br />
+                    <strong> Razem do zapłaty(odbiór osobisty): @Model.GrandTotal</strong> <br />
+                    <strong> Razem do zapłaty(wysyłka na podany adres): @Model.GrandTotalShip</strong> <br /><br />
+
+                    Dane do płatności:<br />
+                    Tytuł:<strong>@Model.Name@Model.LastName@Model.OrderID</strong><br />
+                    Numer konta: <strong>XX XX XXXX XXXX XXXX XXXX XXXX XXXX</strong><br />
+                    Lub Blikiem na numer telefonu <strong>XXX XXX XXX</strong> o tej samej treści<br /><br />
+
+                    Dane do wysyłki:<br />
+                    Imię i nazwisko: @Model.Name @Model.LastName <br />
+                    Telefon: @Model.Number  <br />
+                    E-mail: @Model.Email <br />
+                    Adres: @Model.Adress<br />
+
+                    Zamówione Produkty:
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Cena</th>
+                                <th>Ilość</th>
+                                <th>Razem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @foreach (var item in Model.OrderModelDetails)
+                                {
+                                <tr>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@(item.Price * item.Quantity)</td>
+                                </tr>
+                                }
+                        </tbody>
+                    </table>
+                    </p>
+                </div>
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="card-action">
+                        <div class="row">
+                            <div class="col s6">
+                                <form asp-action="Delete" asp-route-id="@Model.OrderID" method="post">
+                                    <button type="submit" class="btn waves-effect red ">Usuń zamówienie</button>
+                                </form>
+                            </div>
+                            <div class="col s6">
+                                <a asp-action="Edit" asp-route-id="@Model.OrderID" class="btn waves-effect green right">Edytuj zamówienie</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

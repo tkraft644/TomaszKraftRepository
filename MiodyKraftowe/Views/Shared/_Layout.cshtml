@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<title>@ViewData["Title"] - MiodyKraftowe</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Sklep MiodyKraftowe zajmuje się sprzedażą produktów pszczelich, z własnej pasieki położonej na Pojezierzu Wałeckim.">
+<html lang="en">
+<body>
+    <header>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" asp-append-version="true" />
+        <!--Import materialize.css-->
+        <link rel="stylesheet" href="~/css/materialize.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </header>
+    <ul id="dropdown1" class="dropdown-content">
+        <partial name="_Dropdown" />
+    </ul>
+
+    <nav>
+        <div class="nav-wrapper amber darken-2">
+            <div class="container">
+                <a class="brand-logo" asp-area="" asp-controller="Aktualności" asp-action="Index"><img class="responsive-img hide-on-small-only" src="~/images/Obrazki/Logo.PNG" width="50" height="50">MiodyKraftowe</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="dropdown1">Sklep<i class="material-icons right">arrow_drop_down</i></a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Koszyk" asp-action="Index">Koszyk</a>
+                    </li>
+                    <li>
+                        <partial name="_LoginPartial" />
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a asp-area="" asp-controller="Aktualności" asp-action="Index">Aktualności</a></li>
+        <li><a asp-area="" asp-controller="Sklep" asp-action="Index">Sklep</a></li>
+        <li>
+            <a asp-area="" asp-controller="Kategorie" asp-action="Miód">- Miód</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Kategorie" asp-action="Pyłek">- Pyłek</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Kategorie" asp-action="Artykuły">- Artykuły</a>
+        </li>
+        <li><a asp-area="" asp-controller="Koszyk" asp-action="Index">Koszyk</a></li>
+        <li><partial name="_LoginPartialMobile" /></li>
+    </ul>
+
+    <main>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="page-footer amber darken-2">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">O nas</h5>
+                    <p class="grey-text text-lighten-4">Sklep MiodyKraftowe zajmuje się sprzedażą produktów pszczelich, z własnej pasieki położonej na Pojezierzu Wałeckim.</p>
+                </div>
+                <div class="col l3 s12 hide-on-small-only">
+                    <h5 class="white-text"></h5>
+                    <ul>
+                        <br />
+                        <li>
+                            <a class="white-text" asp-area="" asp-controller="Kontakt" asp-action="Create">Kontakt</a>
+                        </li>
+                        <li>
+                            <a class="white-text" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profil</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col l3 s12 hide-on-small-only">
+                    <h5 class="white-text"></h5>
+                    <ul>
+                        <br />
+                        <li>
+                            <a class="white-text" asp-area="" asp-controller="Koszyk" asp-action="Index">Koszyk</a>
+                        </li>
+
+                        <li>
+                            <a class="white-text" asp-area="" asp-controller="Koszyk" asp-action="AllOrders">Zamówienia</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2023 MiodyKraftowe
+                <a class="grey-text text-lighten-4 right" asp-area="" asp-controller="Home" asp-action="Privacy">Polityka Prywatności</a>
+            </div>
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+    <script src="~/js/materialize.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>

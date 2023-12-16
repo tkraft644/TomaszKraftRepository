@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewData["Title"] = "Aktualności";
+}
+@if (User.IsInRole("Admin"))
+{
+
+    <div class="fixed-action-btn">
+        <a href="#!" class="btn-floating btn-large waves-effect amber darken-3">
+            <i class="material-icons">menu</i>
+        </a>
+        <ul>
+            <li>
+                <a asp-action="Posts"
+               class="btn-floating waves-effect amber darken-4">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+            </li>
+            <li>
+                <a asp-action="create"
+               class="btn-floating waves-effect amber darken-4">
+                    <i class="large material-icons">add</i>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="Index"
+               class="btn-floating waves-effect amber darken-4">
+                    <i class="large material-icons">settings</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+}
+
+@foreach (var obj in Model)
+{
+    <div class="row">
+        <div class="col s12 hide-on-med-and-up">
+            <div class="card">
+                <div class="card-image">
+                    <img src=@obj.ObrazekURL>
+                </div>
+                <div class="card-content">
+                        <blockquote class="flow-text" style="border-left: 5px solid #ffa000">
+                        <strong><fontsize="42">@obj.Tytul</fontsize></strong><br>
+                            @obj.Autor | @obj.DataPublikacji.DateTime.ToString("dd.MM.yyyy HH:mm")
+                        </blockquote>
+
+                </div>
+                <div class="card-action white">
+                    <a asp-action="CzytajDalej" asp-route-id="@obj.Id"
+                   class=" btn waves-effect amber darken-3 right">Czytaj Dalej</a>
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+        <div class="col s12 hide-on-small-only">
+            <div class="card horizontal medium">
+                <div class="card-image medium">
+                    <img src="@obj.ObrazekURL">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <blockquote class="flow-text" style="border-left: 5px solid #ffa000">
+                            @obj.Tytul<br>
+                            @obj.Autor | @obj.DataPublikacji.DateTime.ToString("dd.MM.yyyy HH:mm")
+                        </blockquote>
+                        <p class="flow-text"> @obj.Tresc</p>
+                    </div>
+                    <div class="card-action white">
+                        <a asp-action="CzytajDalej" asp-route-id="@obj.Id"
+                       class=" btn waves-effect amber darken-3 right">Czytaj Dalej</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
